@@ -14,7 +14,7 @@
     <div id="main">
         <h2>Login Form</h2>
 
-        <form onsubmit="login(); return false">
+        <form action="" onsubmit="login(); return false">
             <div id="form">
                 <label for="email">Email</label>
                 <input type="email" required id="email">
@@ -33,7 +33,7 @@
         </form>
         <br>
         <br>
-        <div id="message"></div>
+        <div class="message"></div>
         <br>
         <br>
         <div>Create a New Account? <a href="./index.html">Sign Up</a></div>
@@ -46,10 +46,10 @@
             let email = document.querySelector("#email").value;
             let password = document.querySelector("#password").value;
 
-            if (email == " " || password == "") {
-                document.querySelector("#message").innerHTML = 'Please, fill all input first.';
-                return;
-            }
+            // if (email == " " || password == "") {
+            //     document.querySelector("#message").innerHTML = 'Please, fill all input first.';
+            //     return;
+            // }
 
 
             axios.post('https://first-signupform-server.herokuapp.com/signup', {
@@ -59,12 +59,12 @@
 
                 .then(function (response) {
                     console.log(response.data);
-                    document.querySelector("#message").innerHTML = response.data.message
+                    document.querySelector(".message").innerHTML = response.data.message
 
                 })
                 .catch(function (error) {
                     console.log(error.response.data.message);
-                    document.querySelector("#message").innerHTML = error.response.data.message
+                    document.querySelector(".message").innerHTML = error.response.data.message
                 });
 
         }

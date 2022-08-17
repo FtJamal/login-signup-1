@@ -6,22 +6,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-   <link rel="stylesheet" href="style.css" type="text/css">
+    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<style>
+body{
+    background-color: rgb(45, 140, 180);
+
+}
+#main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    /* background-color: aliceblue; */
+    height: 70%;
+
+    /* width: 250px; */
+}
+h1{
+    font-size: 45px;
+    margin-top: 0px;
+}
+#form{
+    display: flex;
+    flex-direction: column;
+}
+#form label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+font-size: 20px;
+margin: 0px;
+/* padding: 5px; */
+}
+input{
+    border-radius: 15px;
+    padding: 5px;
+}
+button{
+    color:rgb(45, 140, 180) ;
+    font-size: 20px;
+    font-weight: bolder;
+    border-radius: 15px;
+    margin: 5px;
+    border-style: none;
+}
+
+
+</style>
+
 </head>
 
 <body>
     <div id="main">
-        <h2>Login Form</h2>
+        <h1>Login Form</h1>
 
-        <form action="" onsubmit="login(); return false">
+        <form onsubmit="login(); return false">
             <div id="form">
                 <label for="email">Email</label>
-                <input type="email" required id="email">
-                <br>
+                <input type="email" required id="email" placeholder="Email">
+                
                 <br>
                 <label for="password">Password</label>
-                <input type="password" required id="password">
+                <input type="password" required id="password" placeholder="Password">
                 <br>
                 <br>
                 <button type="submit">Login</button>
@@ -33,8 +81,8 @@
         </form>
         <br>
         <br>
-        <div class="message"></div>
-        <br>
+        <div id="message"></div>
+        
         <br>
         <div>Create a New Account? <a href="./index.html">Sign Up</a></div>
         <br>
@@ -59,12 +107,13 @@
 
                 .then(function (response) {
                     console.log(response.data);
-                    document.querySelector(".message").innerHTML = response.data.message
-
+                    document.querySelector("#message").innerHTML = response.data.message;
+                    alert(response.data.message)
                 })
                 .catch(function (error) {
                     console.log(error.response.data.message);
-                    document.querySelector(".message").innerHTML = error.response.data.message
+                    document.querySelector("#message").innerHTML = error.response.data.message;
+                    alert(error.response.data.message)
                 });
 
         }

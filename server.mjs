@@ -10,95 +10,95 @@ const port = process.env.PORT || 3000;
 
 let userBase = [];
 
-app.post(`/signup`, (req,res) => {
-let body= req.body;
+app.post(`/signup`, (req, res) => {
+    let body = req.body;
 
-if (!body.firstName
-    || !body.lastName
-    || !body.email
-    || !body.password) {
-    res.status(400).send(
-        `required fields missing, request example:
+    if (!body.firstName
+        || !body.lastName
+        || !body.email
+        || !body.password) {
+        res.status(400).send(
+            `required fields missing, request example:
             {
                 "firstName":"farya",
                 "lastName":"jamal",
                 "email":"abc@abc.com",
                 "password":"1234"
             }`
-    );
-    return;
-}
-let isFound= false;
-
-for (let i=0 ; i<userBase.length; i++){
-    if(userBase[i] ===body.email.toLowerCase()){
-        isFound=true;
-        break;
+        );
+        return;
     }
-}
-if (isFound){
-    res.send(
-        {message:`email ${body.email} already exist`}
-    );
-return;
-}
+    let isFound = false;
 
-let newUser={
-"userId":nanoid(),
-"firstName":body.firstName,
-"lastName":body.lastName,
-"email":body.email.toLowerCase(),
-"password":body.password
-}
+    for (let i = 0; i < userBase.length; i++) {
+        if (userBase[i].email === body.email.toLowerCase()) {
+            isFound = true;
+            break;
+        }
+    }
+    if (isFound) {
+        res.status(400).send(
+            { message: `email ${body.email} already exist` }
+        );
+        return;
+    }
 
-userBase.push(newUser);
-res.status(201).send({message:"user is created"})
+    let newUser = {
+        userId: nanoid(),
+        firstName: body.firstName,
+        lastName: body.lastName,
+        email: body.email.toLowerCase(),
+        password: body.password
+    }
+
+    userBase.push(newUser);
+    res.status(201).send({ message: "user is created" })
 
 })
 
 app.post('/login', (req, res) => {
 
-    let body=res.body
+    let body = req.body;
 
-    if(body.email || body.passsword){
-        res.send(`required fields missing,request example
+    if ( !body.email || !body.passsword) {
+        res.status(400).send(`required fields missing,request example:
         {
-            "email":abc@abc.com,
-            "password":"1234",
+            "email": "abc@abc.com" ,
+            "password": "1234" 
         }`
-        )
+        );
         return;
     }
-  let  isFound = false;
+    let isFound = false;
 
-  for(let i=0 ; i <userBase.length; i++){
-    if(userBase[i].email=== body.email){
-        isFound= true;
-        if (userBase[i].password===body.passsword){
-            res.send({
-                    firstName:userBase[i].firstName,
-                    lastName:userBase[i].lastName,
-                    email:userBase[i].email,
-                    message:"login successful",
-                    token:"some unique token"
+    for (let i = 0; i < userBase.length; i++) {
+        if (userBase[i].email === body.email) {
+            isFound = true;
+            if (userBase[i].password === body.passsword) {
+                res.status(200).send({
+                    firstName: userBase[i].firstName,
+                    lastName: userBase[i].lastName,
+                    email: userBase[i].email,
+                    message: "login successful",
+                    token: "some unique token"
                 })
-            return;
+                return;
 
+            }
+            else {
+                res.status(401).send(
+                    { message: "incorrect password" }
+                )
+                return;
+            }
         }
-        else{
-            res.send(
-              {message:"incorrect password"}  
-            )
-            return;
-        }
+
     }
-
-  }
-  if(!isFound){
-    res.send(
-      {message:"user not found"}  
-    )
-  }
+    if (!isFound) {
+        res.status(404).send(
+            { message: "user not found" }
+        )
+    }
 
 })
 

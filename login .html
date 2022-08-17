@@ -111,7 +111,7 @@ button{
                     alert(response.data.message)
                 })
                 .catch(function (error) {
-                    console.log(error.response.data.message);
+                    console.log(error.response.data);
                     document.querySelector("#message").innerHTML = error.response.data.message;
                     alert(error.response.data.message)
                 });

@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <style>
@@ -98,13 +97,11 @@ button{
             //     document.querySelector("#message").innerHTML = 'Please, fill all input first.';
             //     return;
             // }
-
-
             axios.post('https://first-signupform-server.herokuapp.com/login', {
                 email: 'email',
-                password: 'password'
+                password: 'password',
+            
             })
-
                 .then(function (response) {
                     console.log(response.data);
                     document.querySelector("#message").innerHTML = response.data.message;

@@ -118,14 +118,12 @@ button{
                 .then(function (response) {
                     console.log(response.data);
 
-                    let data = response.data;
-
-                    document.querySelector("#message").innerHTML = data.message
+                    document.querySelector("#message").innerHTML = response.data.message;
                 })
 
                 .catch(function (error) {
                     console.log(error.response.data);
-                    document.querySelector("#message"), innerHTML = error.response.data.message
+                    document.querySelector("#message").innerHTML = error.response.data.message;
                 });
 
 

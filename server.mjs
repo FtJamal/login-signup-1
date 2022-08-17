@@ -98,6 +98,7 @@ app.post('/login', (req, res) => {
         res.status(404).send(
             { message: "user not found" }
         )
+        return;
     }
 
 })

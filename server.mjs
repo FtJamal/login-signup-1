@@ -38,7 +38,7 @@ app.post(`/signup`, (req, res) => {
     }
     if (isFound) {
         res.status(400).send(
-            { message: `email ${body.email.toLowerCase()} already exist` }
+            { message: `email ${body.email} already exist` }
         );
         return;
     }
@@ -52,16 +52,17 @@ app.post(`/signup`, (req, res) => {
     }
 
     userBase.push(newUser);
-    res.status(201).send({ message: "user is created" })
+    res.status(201).send({ message: "user is created" });
 
-})
+});
 
 app.post('/login', (req, res) => {
 
     let body = req.body;
 
-    if ( !body.email || !body.passsword) {
-        res.status(400).send(`required fields missing,request example:
+    if (!body.email || !body.password) {
+        res.status(400).send(
+            `required fields missing,request example:
         {
             "email": "abc@abc.com" ,
             "password": "1234" 
@@ -74,13 +75,13 @@ app.post('/login', (req, res) => {
     for (let i = 0; i < userBase.length; i++) {
         if (userBase[i].email === body.email) {
             isFound = true;
-            if (userBase[i].password === body.passsword) {
+            if (userBase[i].password === body.password) {
                 res.status(200).send({
                     firstName: userBase[i].firstName,
                     lastName: userBase[i].lastName,
                     email: userBase[i].email,
-                    message: "login successful",
-                    token: "some unique token"
+                    message: `login successful`,
+                    token: `some unique token`
                 })
                 return;
 

@@ -90,7 +90,7 @@ button{
         <div id="message"></div>
         <br>
         <br>
-        <div>Already have an account? <a href="login .html">Login</a> </div>
+        <div>Already have an account? <a href="login.html">Login</a> </div>
 
     </div>
     
@@ -108,12 +108,12 @@ button{
                 return;
             }
 
-            axios.post('https://first-signupform-server.herokuapp.com/signup', {
-                firstName: 'firstName',
-                lastName: 'lastName',
-                email: 'email',
-                password: 'password',
-                repeatPassword: 'repeatPassword'
+            axios.post('http://localhost:3000/signup', {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password,
+                repeatPassword: repeatPassword
             })
 
                 .then(function (response) {

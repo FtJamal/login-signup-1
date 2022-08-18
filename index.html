@@ -47,7 +47,7 @@ button{
     font-weight: bolder;
 }
 #message{
-    font-size: 17px;
+    font-size: 25px;
 }
 
 
@@ -108,7 +108,7 @@ button{
                 return;
             }
 
-            axios.post('http://localhost:3000/signup', {
+            axios.post('https://first-signupform-server.herokuapp.com/signup', {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
